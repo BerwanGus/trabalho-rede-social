@@ -1,0 +1,30 @@
+{% extends "capaivara.html" %}
+
+{% block titulo %}
+    INSTA / HOME
+{% endblock %}
+
+{% block body %}
+
+    {% block convite %}
+        <h1> BEM VINDO AO INSTA </h1>
+    {% endblock %}
+
+    {% block formulario %}
+
+        <form method="POST">
+            {{ form.csrf_token }}
+
+            {{ form.email.label() }}
+            {{ form.email() }}
+
+            {{ form.password.label() }}
+            {{ form.password() }}
+
+            {{ form.btn() }}
+        </form>
+
+    {% endblock %}
+
+
+{% endblock %}

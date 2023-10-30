@@ -1,0 +1,22 @@
+{% extends "capaivara.html" %}
+
+{% block titulo %}
+    Profile of {{ user.username }}
+{% endblock %}
+
+
+{% block body %}
+    <h1> PROFILE OF: {{ user.username }} </h1>
+    <a href=" {{ url_for('homepage') }} ">BACK HOME</a> <br>
+    <a href=" {{ url_for('logout') }} ">LOGOUT</a>
+
+    {% if form %}
+        Seu Perfil - Pode Postar
+        <form method="POST" enctype="multipart/form-data">
+            <!-- Formulario vai aqui na proxima aula -->
+        </form>
+    {% endif %}
+
+    <img src="{{ url_for('static', filename='default.jpg') }}">
+
+{% endblock %}
