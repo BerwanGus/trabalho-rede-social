@@ -1,0 +1,12 @@
+{% extends "capaivara.html" %}
+
+{% block titulo %}
+    Profile of {{ user }}
+{% endblock %}
+
+
+{% block body %}
+    <h1> PROFILE OF: {{ user }} </h1>
+    <a href=" {{ url_for('homepage') }} ">BACK HOME</a>
+    <a href=" {{ url_for('logout') }} ">LOGOUT</a>
+{% endblock %}
