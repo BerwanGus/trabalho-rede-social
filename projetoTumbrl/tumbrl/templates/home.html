@@ -4,11 +4,20 @@
 
 
 {% block body %}
-    BOOUA
 
-    {% for i in range(0, 5): %}
-        <h1> {{ textinho }}  </h1>
-    {% endfor %}
+    {% block formulario %}
+    <form method="POST">
+        {{ form.csrf_token }}
+
+        {{ form.email.label() }}
+        {{ form.email() }}
+
+        {{ form.password.label() }}
+        {{ form.password() }}
+
+        {{ form.btn() }}
+    </form>
+    {% endblock %}
 
     <!-- MODO PODRE -->
     <a href="/profile/Josébs">Perfil do Josébs</a> <br>
@@ -21,4 +30,11 @@
     <a href="{{ url_for('profile', user_id='Karrlitus') }}">Perfil do Karrlitus</a> <br>
 
     <iframe src="https://giphy.com/embed/jUwpNzg9IcyrK" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/the-simpsons-scared-homer-simpson-jUwpNzg9IcyrK">via GIPHY</a></p>
+
+
+    BOOUA
+
+    {% for i in range(0, 5): %}
+        <h1> {{ textinho }}  </h1>
+    {% endfor %}
 {% endblock %}
