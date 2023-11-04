@@ -25,3 +25,9 @@ class FormCreateNewAccount(FlaskForm):
         email_of_user = User.query.filter_by(email=email.data).first()
         if email_of_user:
             return ValidationError('~ email já existe ~')
+
+
+class FormCreateNewPost(FlaskForm):
+    text = StringField('PostText', widget=TextArea(), validators=[DataRequired()])
+    photo = FileField('Photo', validators=[DataRequired()])
+    btn = SubmitField('Publish')
