@@ -1,12 +1,31 @@
 {% extends "capaivara.html" %}
 
 {% block titulo %}
-    Profile of {{ user }}
+    Profile of {{ user.username }}
 {% endblock %}
 
 
 {% block body %}
-    <h1> PROFILE OF: {{ user }} </h1>
+    <h1> PROFILE OF: {{ user.username }} </h1>
     <a href=" {{ url_for('homepage') }} ">BACK HOME</a>
     <a href=" {{ url_for('logout') }} ">LOGOUT</a>
+
+    {% if form %}
+        <h4>Seu Perfil ~ Pode postar</h4>
+
+        <form method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+
+            {{ form.text.label() }}
+            {{ form.text }}
+
+            {{ form.photo.label() }}
+            {{ form.photo }}
+
+            {{ form.btn() }}
+        </form>
+
+    {% endif %}
+
+
 {% endblock %}
