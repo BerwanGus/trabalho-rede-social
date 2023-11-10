@@ -27,5 +27,9 @@
 
     {% endif %}
 
+    {% for post in user.posts %}
+        <p>{{ post.post_text }}</p>
+        <img src="{{ url_for('static', filename='fotos_dos_posts/{}'.format(post.post_img) ) }}">
+    {% endfor %}
 
 {% endblock %}
