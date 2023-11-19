@@ -15,12 +15,15 @@ class User(database.Model, UserMixin):
     username = database.Column(database.String, nullable=False, unique=True)
     email = database.Column(database.String, nullable=False, unique=True)
     password = database.Column(database.String, nullable=False)
-    posts = database.Relationship("Posts", backref='user', lazy=True)
+    posts = database.Relationship("Posts", backref='user', lazy=True,
+                                  cascade='all, delete-orphan')
 
 
 class Posts(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     post_text = database.Column(database.String, default='')
     post_img = database.Column(database.String, default='default.png')
+    likes = database.Column(database.Integer, nullable=False)
+    dislikes = database.Column(database.Integer, nullable=False)
     creation_date = database.Column(database.DateTime, nullable=False, default=datetime.utcnow())
     user_id = database.Column(database.Integer, database.ForeignKey('user.id'), nullable=False)

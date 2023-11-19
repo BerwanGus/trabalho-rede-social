@@ -1,0 +1,12 @@
+{% extends "perry.html" %}
+
+{% block body %}
+    <p>AAAAAAAAA</p>
+    <form method='POST'>
+        <p>{{post.post_text}}</p>
+        <img class="img-thumbnail rounded" src="{{ url_for('static', filename='fotos_dos_posts/{}'.format(post.post_img)) }}"><br>
+        {{ form.like_btn }}
+        {{ form.dislike_btn }}
+    </form>
+
+{% endblock%}

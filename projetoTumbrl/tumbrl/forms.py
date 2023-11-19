@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, FileField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 
-from tumbrl.models import User
+from tumbrl.models import User, Posts
 from wtforms.widgets import TextArea
 
 
@@ -26,8 +26,16 @@ class FormCreateNewAccount(FlaskForm):
         if email_of_user:
             return ValidationError('~ email já existe ~')
 
+class FormDeleteAccount(FlaskForm):
+    btn = SubmitField('Delete Account')
+
 
 class FormCreateNewPost(FlaskForm):
     text = StringField('PostText', widget=TextArea(), validators=[DataRequired()])
     photo = FileField('Photo', validators=[DataRequired()])
     btn = SubmitField('Publish')
+
+
+class FormLikePost(FlaskForm):
+    like_btn = SubmitField('Like')
+    dislike_btn = SubmitField('Dislike')

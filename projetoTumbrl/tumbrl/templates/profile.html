@@ -2,12 +2,10 @@
 
 {% block titulo %}  Perfil do {{ user.username }} {% endblock %}
 
-
 {% block body %}
 
-    <h1> Faaala {{ user.username }}!  -  {{ mesa }} </h1>
+    <h1> {{ user.username }}!  -  {{ mesa }} </h1>
     <a href=" {{ url_for('homepage') }} "> HOME </a>
-
 
     {% if form %}
         <h2> MEU PERFIL </h2>
@@ -23,14 +21,18 @@
 
             {{ form.btn() }}
         </form>
-
     {% endif %}
 
     {% for post in user.posts %}
         <!-- <img src="{{ url_for('static', filename='fotos_dos_posts/default.jpg') }}"> -->
         <p>{{post.post_text}}</p>
-        <img class="img-thumbnail rounded" src="{{ url_for('static', filename='fotos_dos_posts/{}'.format(post.post_img)) }}">
+        <a href=" {{ url_for('post', post_id=post.id) }} ">
+            <img class="img-thumbnail rounded" src="{{ url_for('static', filename='fotos_dos_posts/{}'.format(post.post_img)) }}"><p>
+        </a>
+
     {% endfor %}
 
+    <br>
+    <a href=" {{ url_for('deleteAccount', user_id=user.id) }} "> Delete account </a><br><br>
 
 {% endblock %}

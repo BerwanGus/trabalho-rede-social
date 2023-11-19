@@ -3,7 +3,9 @@ from tumbrl import app
 from flask import render_template, url_for, redirect
 from flask_login import login_required, login_user, current_user
 from tumbrl.models import load_user
-from tumbrl.forms import FormLogin, FormCreateNewAccount, FormCreateNewPost
+from tumbrl.forms import (FormLogin, FormCreateNewAccount,
+                          FormCreateNewPost, FormLikePost,
+                          FormDeleteAccount)
 from tumbrl import bcrypt
 from tumbrl.models import User, Posts
 from tumbrl import database
@@ -22,7 +24,7 @@ def homepage():
             login_user(userToLogin)
             return redirect(url_for("profile", user_id=userToLogin.id))
 
-    return render_template('home.html', textinho='TOP', form=_formLogin)
+    return render_template('home.html', textinho='Tumblr', form=_formLogin)
 
 
 @app.route('/new', methods=['POST', 'GET'])
@@ -53,6 +55,30 @@ def createAccount():
     return render_template('new.html', form=_formCreateNewAccount)
 
 
+@app.route('/profile/delete/<user_id>', methods=['POST', 'GET'])
+@login_required
+def deleteAccount(user_id):
+    
+    if int(user_id) == int(current_user.id):
+        _formDeleteAccount = FormDeleteAccount()
+        
+        if _formDeleteAccount.is_submitted():
+            print('deleting object')
+            user = User.query.get(user_id)
+            print(user)
+            
+            database.session.delete(user)
+            database.session.commit()
+            return redirect(url_for('createAccount'))
+
+        else:
+            _user = User.query.get(int(user_id))
+            return render_template('delete.html', user=_user,
+                                form=_formDeleteAccount)
+    else:
+        return redirect(url_for('createAccount'))
+
+
 @app.route('/perry')
 def perry():
     return render_template('perry.html')
@@ -62,10 +88,11 @@ def perry():
 def teste():
     return render_template('teste.html')
 
-
+import sys
 @app.route('/profile/<user_id>', methods=['POST', 'GET'])
 @login_required
 def profile(user_id):
+        
     if int(user_id) == int(current_user.id):
         _formCreateNewPost = FormCreateNewPost()
 
@@ -78,7 +105,8 @@ def profile(user_id):
 
             _postText = _formCreateNewPost.text.data
 
-            newPost = Posts(post_text=_postText, post_img=photo_name, user_id=int(current_user.id))
+            newPost = Posts(post_text=_postText, post_img=photo_name, likes=0,
+                            dislikes=0, user_id=int(current_user.id))
             database.session.add(newPost)
             database.session.commit()
 
@@ -86,4 +114,19 @@ def profile(user_id):
 
     else:
         _user = User.query.get(int(user_id))
-        return render_template('profile.html', user=_user, form=None)
+        return render_template('profile.html', user=_user)
+
+@app.route('/post/<post_id>', methods=['POST', 'GET'])
+def post(post_id):
+    _formLikePost = FormLikePost()
+    _post = Posts.query.get(int(post_id))
+    
+    if _formLikePost.is_submitted():
+        if _formLikePost.like_btn.data:
+            _post.likes += 1
+            database.session.commit()
+        if _formLikePost.dislike_btn.data:
+            _post.dislikes += 1
+            database.session.commit()
+    
+    return render_template('post.html', post=_post, form=_formLikePost)

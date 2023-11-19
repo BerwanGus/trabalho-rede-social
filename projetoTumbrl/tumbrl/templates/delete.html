@@ -1,0 +1,12 @@
+{% extends "perry.html" %}
+
+{% block titulo %}  Deletar {{ user.username }} {% endblock %}
+
+{% block body %}
+    <h1> Deletar {{ user.username }}!  -  {{ mesa }} </h1>
+
+    <a href=" {{ url_for('homepage') }} "> HOME </a><br><br>
+    <form method="POST">
+        {{ form.btn() }}
+    </form>
+{% endblock %}
