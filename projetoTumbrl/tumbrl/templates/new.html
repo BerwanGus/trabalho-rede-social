@@ -1,21 +1,26 @@
-{% extends "perry.html" %}
+{% extends "base.html" %}
 
 {% block body %}
-<form method="POST">
-    {{ form.csrf_token }}
+<nav>
+    <a href="{{ url_for('homepage') }}">Home</a>
+</nav>
 
-    {{ form.email.label() }}
-    {{ form.email() }}
+<form method="POST" class='register-form'>
+    <div class='register-div'>
+        {{ form.csrf_token }}
 
-    {{ form.usarname.label() }}
-    {{ form.usarname() }}
+        {{ form.email.label() }}
+        {{ form.email() }}
 
-    {{ form.password.label() }}
-    {{ form.password() }}
+        {{ form.usarname.label() }}
+        {{ form.usarname() }}
 
-    {{ form.checkPassword.label() }}
-    {{ form.checkPassword() }}
+        {{ form.password.label() }}
+        {{ form.password() }}
 
+        {{ form.checkPassword.label() }}
+        {{ form.checkPassword() }}
+    </div>
     {{ form.btn() }}
 </form>
 {% endblock %}

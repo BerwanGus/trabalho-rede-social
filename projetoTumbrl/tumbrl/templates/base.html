@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% block titulo %}  Tumblr {% endblock %}
+    </title>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+
+<body>
+    {% block body %}
+        
+    {% endblock %}
+</body>
+
+</html>

@@ -31,8 +31,8 @@ class FormDeleteAccount(FlaskForm):
 
 
 class FormCreateNewPost(FlaskForm):
-    text = StringField('PostText', widget=TextArea(), validators=[DataRequired()])
-    photo = FileField('Photo', validators=[DataRequired()])
+    text = StringField('Description', widget=TextArea(), validators=[DataRequired()])
+    photo = FileField('Attach image', validators=[DataRequired()])
     btn = SubmitField('Publish')
 
 

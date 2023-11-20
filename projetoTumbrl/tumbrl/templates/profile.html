@@ -1,37 +1,39 @@
-{% extends "perry.html" %}
+{% extends "base.html" %}
+{% include "navbar.html" %}
 
 {% block titulo %}  Perfil do {{ user.username }} {% endblock %}
 
 {% block body %}
-
-    <h1> {{ user.username }}!  -  {{ mesa }} </h1>
-    <a href=" {{ url_for('homepage') }} "> HOME </a>
+    <h1> {{ user.username }} </h1>
 
     {% if form %}
-        <h2> MEU PERFIL </h2>
 
-        <form method="POST" enctype="multipart/form-data">
+        <h2>Create new post</h2>
+        <form method="POST" enctype="multipart/form-data" class='create-post'>
             {{ form.csrf_token }}
 
-            {{ form.text.label() }}
-            {{ form.text() }}
+            {{ form.text.label() }}<br>
+            {{ form.text() }}<br><br>
 
-            {{ form.photo.label() }}
-            {{ form.photo() }}
+            {{ form.photo.label() }}<br>
+            {{ form.photo() }}<br><br>
 
             {{ form.btn() }}
         </form>
     {% endif %}
 
+    <h2> My feed </h2>
     {% for post in user.posts %}
-        <!-- <img src="{{ url_for('static', filename='fotos_dos_posts/default.jpg') }}"> -->
-        <p>{{post.post_text}}</p>
-        <a href=" {{ url_for('post', post_id=post.id) }} ">
-            <img class="img-thumbnail rounded" src="{{ url_for('static', filename='fotos_dos_posts/{}'.format(post.post_img)) }}"><p>
-        </a>
-
+        <div class='post-div'>
+            <!-- <img src="{{ url_for('static', filename='fotos_dos_posts/default.jpg') }}"> -->
+            <p>{{post.post_text}}</p>
+            <a href=" {{ url_for('post', post_id=post.id) }} ">
+                <img class="img-thumbnail rounded" src="{{ url_for('static', filename='fotos_dos_posts/{}'.format(post.post_img)) }}"><p>
+            </a>
+        </div>
     {% endfor %}
 
+    <hr>
     <br>
     <a href=" {{ url_for('deleteAccount', user_id=user.id) }} "> Delete account </a><br><br>
 

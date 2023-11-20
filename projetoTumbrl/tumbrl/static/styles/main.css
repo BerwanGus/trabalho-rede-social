@@ -1,0 +1,61 @@
+*{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav a{
+    background-color: rgb(228, 228, 228);
+}
+
+a{
+    padding: 10px;
+    margin: 5px;
+    color: black;
+    text-decoration: none;
+}
+
+input{
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 5px;
+}
+
+img{
+    max-height: 400px;
+}
+
+.home{
+    text-align: center;
+}
+
+.create-post{
+    margin-left: 5vh;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 10px;
+    background-color: rgb(228, 228, 228);
+}
+
+.post-div{
+    width: 100%;
+    text-align: center;
+}
+
+
+input[type='submit'] {
+    padding: 10px;
+    background-color: rgb(99, 93, 184);
+    color: white;
+    font-weight: bold;
+}
+
+.register-form {
+    width: 100%;
+    text-align: center;
+}
+
+.register-div{
+    text-align: center;
+    display: grid;
+    margin: 0 400px 0 100px;
+    grid-template-columns: 1fr 1fr;
+}

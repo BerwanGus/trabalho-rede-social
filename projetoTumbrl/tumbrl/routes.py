@@ -14,7 +14,6 @@ import os
 from werkzeug.utils import secure_filename
 
 
-# @app.route('/home')
 @app.route('/', methods=['POST', 'GET'])
 def homepage():
     _formLogin = FormLogin()
@@ -24,7 +23,7 @@ def homepage():
             login_user(userToLogin)
             return redirect(url_for("profile", user_id=userToLogin.id))
 
-    return render_template('home.html', textinho='Tumblr', form=_formLogin)
+    return render_template('home.html', form=_formLogin)
 
 
 @app.route('/new', methods=['POST', 'GET'])
@@ -109,6 +108,7 @@ def profile(user_id):
                             dislikes=0, user_id=int(current_user.id))
             database.session.add(newPost)
             database.session.commit()
+            return redirect(url_for('profile', user_id=user_id))
 
         return render_template('profile.html', user=current_user, form=_formCreateNewPost)
 
@@ -129,4 +129,5 @@ def post(post_id):
             _post.dislikes += 1
             database.session.commit()
     
-    return render_template('post.html', post=_post, form=_formLikePost)
+    return render_template('post.html', post=_post, form=_formLikePost,
+                           user=current_user)
