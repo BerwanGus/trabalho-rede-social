@@ -37,9 +37,18 @@ img{
 
 .post-div{
     width: 100%;
+    padding: 20px;
     text-align: center;
 }
 
+.post-div img{
+    border-radius: 20px;
+}
+
+.post-div img:hover{
+    border-radius: 0;
+    transition: border-radius 0.25s;
+}
 
 input[type='submit'] {
     padding: 10px;
